@@ -14,9 +14,9 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call('UsersTableSeeder');
-        $this->call('PostsTableSeeder');
-        $this->call('CommentsTableSeeder');
+        $this->call('UserTableSeeder');
+        $this->call('PostTableSeeder');
+        $this->call('CommentTableSeeder');
         $this->call('TagTableSeeder');
         $this->call('TagPostTableSeeder');
 
