@@ -11,6 +11,41 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+/*------------------------------------------*\
+        Pattern (securite)
+\*------------------------------------------*/
+Route::pattern('id', '[1-9][0-9]*');
+
+
+/*------------------------------------------*\
+        Blog
+\*------------------------------------------*/
+Route::get('/', 'BlogController@index');
+Route::get('conference/{id}/{slug}/{date?}', 'BlogController@showPost');
+Route::get('contact', 'BlogController@contact');
+Route::get('about', 'BlogController@about');
+
+Route::get('tag/{id}', 'BlogController@showTag');
+
+/*------------------------------------------*\
+       Auth
+\*------------------------------------------*/
+Route::Controllers([
+    'auth'  => 'Auth\AuthController',
+    'password'  => 'Auth\PasswordController',
+]);
+
+/*------------------------------------------*\
+        Controller REST
+\*------------------------------------------*/
+Route::resource('comment', 'CommentController');
+Route::resource('post', 'PostController');
+
+/*------------------------------------------*\
+       Dashbord
+\*------------------------------------------*/
+Route::get('dashboard', 'Admin\DashboardController@index');
+
+
