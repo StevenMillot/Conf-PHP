@@ -26,6 +26,7 @@ Route::get('/', 'BlogController@index');
 Route::get('conference/{id}/{slug}/{date?}', 'BlogController@showPost');
 Route::get('contact', 'BlogController@contact');
 Route::get('about', 'BlogController@about');
+Route::get('term', 'BlogController@term');
 
 Route::get('tag/{id}', 'BlogController@showTag');
 
@@ -46,6 +47,6 @@ Route::resource('post', 'PostController');
 /*------------------------------------------*\
        Dashbord
 \*------------------------------------------*/
-Route::get('dashboard', 'Admin\DashboardController@index');
+Route::get('dashboard', 'DashboardController@index');
 
 

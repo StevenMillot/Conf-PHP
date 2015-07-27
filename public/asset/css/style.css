@@ -58,6 +58,7 @@ header#banner{
     background-color: rgba(248,248,255, 0.80);
     padding: 0 0rem 2rem 10%; 
     box-shadow: 0px 0px 3px 0 #aaa;
+    z-index: 1;
 }
 header#banner:after{
     content:"";

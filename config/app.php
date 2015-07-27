@@ -145,8 +145,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\MyHtmlServiceProvider::class,
-        App\Providers\CurrentServiceProvider::class,
-
     ],
 
     /*
@@ -201,8 +199,6 @@ return [
         * Application Facades
         */
         'MyHtml'      => App\Facades\Myhtml::Class,
-        'Current'      => App\Facades\Current::Class,
-
     ],
 
 ];

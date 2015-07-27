@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -13,24 +14,31 @@ class BlogController extends Controller
 {
     public function index()
     {
-        $posts = Post::all()->sortByDesc('date_start')->where('status', 'publish');
-        return view ('blog.index', compact('posts'));
+        $posts = Post::published()->get();
+        $comments = Comment::published()->get();
+        return view ('blog.index', compact('posts','comments'));
     }
 
     public function showPost($id)
     {
         $post = Post::find($id);
-        return view ('blog.conference', compact('post'));
+        $comments = Comment::published($post->id)->get();
+        return view ('blog.conference', compact('post', 'comments'));
     }
 
     public function contact()
     {
-        return view ('blog.contact');
+        return view ('blog.partials.contact');
     }
 
     public function about()
     {
-        return view ('blog.about');
+        return view ('blog.partials.about');
+    }
+
+    public function term()
+    {
+        return view ('blog.partials.term');
     }
 
     public function showTag($id)

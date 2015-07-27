@@ -24,7 +24,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::all();
+        $comments = Comment::published()->get();
         return view('comment.index', compact('comments'));
     }
 
@@ -35,8 +35,18 @@ class CommentController extends Controller
      */
     public function store(CommentRequest $request)
     {
-        Comment::create($request->all());
-        return back();
+        /*
+        $comment = new Comment();
+        $comment->email = $request['email'];
+        $comment->message = $request['message'];
+        $comment->status = 'unpublish';
+        $comment->save();
+        */
+
+        $request = $request->all();
+        $request['status'] = 'unpublish';
+        Comment::create($request);
+        return back()->with('message', 'Commentaire en cours de validation par l\'administrateur');
     }
 
     /**
@@ -68,7 +78,6 @@ class CommentController extends Controller
      * @param  int  $id
      * @return Response
      */
-    // $request = toute nos données POST
     public function update($id, CommentRequest $request)
     {
         $comment = Comment::find($id)->update($request->all());

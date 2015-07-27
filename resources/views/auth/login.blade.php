@@ -12,7 +12,7 @@
         {!!Form::password('password', null , ['class'=>'form-control', 'required']) !!}<br/><br/>
         {!! Form::label('remember', 'Remember me:') !!}
         {!!Form::checkbox('remember', 1, false, ['class'=>'form-control']) !!}<br/>
-        {!!Form::submit('Okay', ['class'=>'btn', 'required']) !!}
+        {!!Form::submit('Valider', ['class'=>'btn', 'required']) !!}
     </div>
     {!! Form::close() !!}
 </article>

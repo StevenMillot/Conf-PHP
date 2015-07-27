@@ -12,7 +12,9 @@
                 <h2>
                     <a href="{{url('conference', [$post->id, $post->slug])}}" class="link-post" >{{$post->title}}</a>
                 </h2>
-                <img class="left" src="{{ url('/asset/images/confs/' , [$post->thumbnail_link]) }}" >
+                <a href="{{url('conference', [$post->id, $post->slug])}}" >
+                    <img class="left" src="{{ url('/asset/images/confs/' , [$post->thumbnail_link]) }}" >
+                </a>
                 <p class="abstract">
                     {{$post->excerpt}}
                     <br>
@@ -28,7 +30,7 @@
                     @endforeach
                 </p>
                 <p>Nombre de commentaires:
-                    <a href="{{url('conference', [$post->id, $post->slug])}}#comment ">{{count($post->comments)}}</a>
+                    <a href="{{url('conference', [$post->id, $post->slug])}}#comment ">{{count($comments)}}</a>
                 </p>
                 <h3 class="date">début: {{$post->date_start}} fin: {{$post->date_end}}</h3>
             </article>
