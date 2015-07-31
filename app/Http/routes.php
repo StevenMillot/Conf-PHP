@@ -23,10 +23,11 @@ Route::pattern('id', '[1-9][0-9]*');
         Blog
 \*------------------------------------------*/
 Route::get('/', 'BlogController@index');
-Route::get('conference/{id}/{slug}/{date?}', 'BlogController@showPost');
-Route::get('contact', 'BlogController@contact');
+Route::get('conference/{id}/{slug?}', 'BlogController@showPost');
 Route::get('about', 'BlogController@about');
 Route::get('term', 'BlogController@term');
+Route::get('contact', 'BlogController@contact');
+Route::get('contact', 'FrontController@postContact');
 
 Route::get('tag/{id}', 'BlogController@showTag');
 
@@ -43,6 +44,7 @@ Route::Controllers([
 \*------------------------------------------*/
 Route::resource('comment', 'CommentController');
 Route::resource('post', 'PostController');
+
 
 /*------------------------------------------*\
        Dashbord

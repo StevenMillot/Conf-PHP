@@ -11,9 +11,14 @@ class Post extends Model
     use SoftDeletes;
 
     protected $fillable=[
+        'user_id',
         'title',
+        'slug',
+        'excerpt',
         'content',
-        'status'
+        'date_start',
+        'date_end',
+        'url_site'
     ];
 
     protected $dates = [
@@ -34,7 +39,6 @@ class Post extends Model
         return Carbon::parse($value)->format('d-m-Y H:i:s');
     }
 
-
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -54,7 +58,19 @@ class Post extends Model
     {
         if(is_null($id))
             return $query->where('status', '=', 'publish');
+
         return $query->whereRaw('status=? AND id=?', ['publish', (int)$id])->orderBy('date_start', 'DESC');
     }
 
+    public function getComments()
+    {
+        $getComments = Comment::published($this->id)->get();
+        return $getComments;
+    }
+
+    public function nbComments()
+    {
+        $nbComments = $this->getComments()->count();
+        return $nbComments;
+    }
 }

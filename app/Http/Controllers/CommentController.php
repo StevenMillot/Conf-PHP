@@ -15,6 +15,7 @@ class CommentController extends Controller
     public function __construct()
     {
         parent::__construct();
+        $this->middleware('auth', ['except' => 'show']);
     }
 
     /**
@@ -24,8 +25,8 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::published()->get();
-        return view('comment.index', compact('comments'));
+        $comments = Comment::all();
+        return view('dashboard.comment.index', compact('comments'));
     }
 
     /**
@@ -42,11 +43,11 @@ class CommentController extends Controller
         $comment->status = 'unpublish';
         $comment->save();
         */
+        /*$param['status'] = 'unpublish';*/
 
-        $request = $request->all();
-        $request['status'] = 'unpublish';
-        Comment::create($request);
-        return back()->with('message', 'Commentaire en cours de validation par l\'administrateur');
+        $param = $request->all();
+        Comment::create($param);
+        return back()->with('message', 'Commentaire envoyé, en attente de validation par l\'administrateur');
     }
 
     /**
@@ -57,7 +58,7 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        return view ('comment.show');
+        return view ('dashboard.comment.show');
     }
 
     /**
@@ -69,7 +70,7 @@ class CommentController extends Controller
     public function edit($id)
     {
         $comment = Comment::find($id);
-        return view ('comment.edit', compact('comment'));
+        return view ('dashboard.comment.edit', compact('comment'));
     }
 
     /**
@@ -80,8 +81,8 @@ class CommentController extends Controller
      */
     public function update($id, CommentRequest $request)
     {
-        $comment = Comment::find($id)->update($request->all());
-        return redirect()->to('comment')->with('message', 'success update');
+        Comment::find($id)->update($request->all());
+        return redirect()->to('comment')->with('message', 'Commentaire modifiée');
     }
 
     /**
@@ -94,7 +95,7 @@ class CommentController extends Controller
     {
         Comment::destroy($id);
 
-        return redirect()->to('comment')->with('message', 'success create');
+        return redirect()->to('comment')->with('message', 'Commentaire supprimée');
     }
 
 }

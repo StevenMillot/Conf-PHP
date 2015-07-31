@@ -199,15 +199,15 @@ desired effect
                                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                                 </div>--}}
                                 <div class="pull-right">
-                                    <a href="{{url('auth/logout')}}" class="btn btn-default btn-flat">Sign out</a>
+                                    <a href="{{url('auth/logout')}}" class="btn btn-default btn-flat">Logout</a>
                                 </div>
                             </li>
                         </ul>
                     </li>
                     <!-- Control Sidebar Toggle Button -->
-                    <li>
+                    {{--<li>
                         <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
+                    </li>--}}
                 </ul>
             </div>
         </nav>
@@ -226,7 +226,7 @@ desired effect
                 <div class="pull-left info">
                     <p>Admin</p>
                     <!-- Status -->
-                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                    <a href="#"><i class="fa fa-circle text-green"></i> Online</a>
                 </div>
             </div>
 
@@ -245,13 +245,13 @@ desired effect
             <ul class="sidebar-menu">
                 <li class="header">BLOG</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="{{url('#')}}"><i class="fa fa-link"></i> <span>New Conférence</span></a></li>
+                <li class="active"><a href="{{url('post/create')}}"><i class="fa fa-link"></i> <span>New Conférence</span></a></li>
                 {{--<li><a href="#"><i class="fa fa-link"></i> <span>New Comment</span></a></li>--}}
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Edit</span> <i class="fa fa-angle-right pull-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a href="{{url('comment')}}">Comments</a></li>
                         <li><a href="{{url('post')}}">Conférences</a></li>
+                        <li><a href="{{url('comment')}}">Commentaires</a></li>
                     </ul>
                 </li>
                 <li class="header">NAVIGATION</li>
@@ -268,7 +268,7 @@ desired effect
         <section class="content-header">
             <h1>
                 Admin Page
-                <small>Custom Blog</small>
+                <small>ConfPHP</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{url('dashboard')}}"><i class="fa fa-dashboard"></i> Main</a></li>
@@ -278,14 +278,20 @@ desired effect
 
         <!-- Main content -->
         <section class="content">
-
+            <div class="message">
+                <p>
+                    @if(Session::has('message'))
+                        {{Session::get('message')}}
+                    @endif
+                </p>
+            </div>
             @section('content')
-                <ul>
-                    <li><a href="{{url('comment')}}">Gestion des commentaires</a></li>
-                    <li><a href="{{url('post')}}">Gestion des conférences</a></li>
-                </ul>
+                <button class="btn btn-success" ><a href="{{ url('post/create') }} ">New Conférence</a></button><br>
+                <br>
+                <button class="btn btn-default"><a href="{{ url('post') }}">Gestion des conférences</a></button><br>
+                <br>
+                <button class="btn btn-default"><a href="{{ url('comment') }}">Gestion des commentaires</a></button>
             @show
-
         </section><!-- /.content -->
     </div><!-- /.content-wrapper -->
 
@@ -300,7 +306,7 @@ desired effect
     </footer>
 
     <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
+   {{-- <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
         <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
             <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
@@ -323,7 +329,7 @@ desired effect
                     </li>
                 </ul><!-- /.control-sidebar-menu -->
 
-                {{--<h3 class="control-sidebar-heading">Tasks Progress</h3>
+                <h3 class="control-sidebar-heading">Tasks Progress</h3>
                 <ul class="control-sidebar-menu">
                     <li>
                         <a href="javascript::;">
@@ -336,7 +342,7 @@ desired effect
                             </div>
                         </a>
                     </li>
-                </ul>--}}<!-- /.control-sidebar-menu -->
+                </ul><!-- /.control-sidebar-menu -->
 
             </div><!-- /.tab-pane -->
             <!-- Stats tab content -->
@@ -348,18 +354,18 @@ desired effect
                     <div class="form-group">
                         <p><a href="{{url('/')}}">Index site</a></p>
                         <p><a href="{{url('auth/logout')}}">Logout</a></p>
-                        {{--<label class="control-sidebar-subheading">
+                        --}}{{--<label class="control-sidebar-subheading">
                             Report panel usage
                             <input type="checkbox" class="pull-right" checked />
-                        </label>--}}
-                        {{--<p>
+                        </label>--}}{{--
+                        --}}{{--<p>
                             Some information about this general settings option
-                        </p>--}}
+                        </p>--}}{{--
                     </div><!-- /.form-group -->
                 </form>
             </div><!-- /.tab-pane -->
         </div>
-    </aside><!-- /.control-sidebar -->
+    </aside>--}}<!-- /.control-sidebar -->
     <!-- Add the sidebar's background. This div must be placed
          immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>

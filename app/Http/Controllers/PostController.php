@@ -6,10 +6,14 @@ use App\Category;
 use App\Post;
 use App\Http\Requests\PostRequest;
 
+use App\Tag;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Intervention\Image\ImageManagerStatic;
 
 class PostController extends Controller
 {
@@ -27,7 +31,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('post.index', compact('posts'));
+        return view('dashboard.post.index', compact('posts'));
     }
 
     /**
@@ -37,7 +41,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view ('post.create');
+        $tags = Tag::all();
+        return view ('dashboard.post.create', compact('tags'));
     }
 
     /**
@@ -47,10 +52,29 @@ class PostController extends Controller
      */
     public function store(PostRequest $request)
     {
-        Post::create($request->all());
-        return redirect()->to('post');
+        $param = $request->all();
+        $param['user_id'] = Auth::user()->id;
 
+        /*$param['status'] = 'publish';*/
 
+        $post = Post::create($param);
+
+        if(array_key_exists( 'tags', $param))
+            $post->tags()->attach($param['tags']);
+
+        if ($request->hasFile('thumbnail_link'))
+        {
+            $file = $request->file('thumbnail_link');
+            $ext = $file->getClientOriginalExtension();
+            $name = $post->slug . '.' . $ext;
+            ImageManagerStatic::make($file)->fit(200,150)->save(public_path() . "/asset/images/confs/" . $name);
+            $post->thumbnail_link = $name;
+            /*$file->move('asset\images\confs', $name );*/
+        }
+
+        $post->save();
+
+        return redirect()->to('post')->with('message', 'Success create');
     }
 
     /**
@@ -62,7 +86,7 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view ('post.show',compact('post'));
+        return view ('dashboard.post.show',compact('post'));
     }
 
     /**
@@ -73,8 +97,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $tags = Tag::all();
         $post = Post::find($id);
-        return view ('post.edit', compact('post'));
+        return view ('dashboard.post.edit', compact('post', 'tags'));
     }
 
     /**
@@ -83,11 +108,31 @@ class PostController extends Controller
      * @param  int  $id
      * @return Response
      */
-    // $request = toute nos données POST
     public function update($id, PostRequest $request)
     {
-        $post = Post::find($id)->update($request->all());
-        return redirect()->to('post')->with('message', 'success update');
+        $post = Post::find($id);
+        $param = $request->all();
+        $param['date_start'] = Carbon::parse($param['date_start'])->format('Y-m-d H:i:s');;
+        $param['date_end'] = Carbon::parse($param['date_end'])->format('Y-m-d H:i:s');;
+        $post->update($param);
+
+        if(array_key_exists( 'tags', $param))
+            $post->tags()->detach($param['tags']);
+            $post->tags()->attach($param['tags']);
+
+        if ($request->hasFile('thumbnail_link'))
+        {
+            $file = $request->file('thumbnail_link');
+            $ext = $file->getClientOriginalExtension();
+            $name = $post->slug . '.' . $ext;
+            ImageManagerStatic::make($file)->fit(200,150)->save(public_path() . "/asset/images/confs/" . $name);
+            $post->thumbnail_link = $name;
+            /*$file->move('asset\images\confs', $name );*/
+        }
+
+        $post->save();
+
+        return redirect()->to('post')->with('message', 'Conférence modifiée');
     }
 
 
@@ -101,6 +146,6 @@ class PostController extends Controller
     {
         Post::destroy($id);
 
-        return redirect()->to('post')->with('message', 'success delete');
+        return redirect()->to('post')->with('message', 'Conférence supprimée');
     }
 }

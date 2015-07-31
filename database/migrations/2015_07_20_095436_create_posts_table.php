@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->dateTime('date_end');                           //Fin de conference
             $table->string('thumbnail_link');                       //Lien image
             $table->string('url_site');                             //Lien site
-            $table->enum('status', ['publish', 'unpublish'])->default('unpublish');
+            $table->enum('status', ['publish', 'unpublish'])->default('publish');
             $table->integer('user_id')->unsigned()->nullable();     //Champs user_id //unsigned=int positif
             $table->foreign('user_id')
                 ->references('id')
