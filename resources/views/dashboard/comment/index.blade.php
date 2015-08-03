@@ -18,54 +18,56 @@
         <tbody>
             @foreach($comments as $comment)
                 <tr>
-                    <td><div class="col-lg-12">{{ $comment->status }}</div></td>
-                    <td><div class="col-lg-12">{{ $comment->created_at }}</div></td>
-                    <td><div class="col-lg-12">{{ $comment->post->title }}</div></td>
-                    <td><div class="col-lg-12">{{ $comment->email }}</div></td>
-                    <td><div class="col-lg-12">{{ $comment->message }}</div></td>
-                    <td>
-                        @if($comment->status == 'unpublish')
+                    @if($comment->post)
+                        <td><div class="col-lg-12">{{ $comment->status }}</div></td>
+                        <td><div class="col-lg-12">{{ $comment->created_at }}</div></td>
+                        <td><div class="col-lg-12">{{ $comment->post->title }}</div></td>
+                        <td><div class="col-lg-12">{{ $comment->email }}</div></td>
+                        <td><div class="col-lg-12">{{ $comment->message }}</div></td>
+                        <td>
+                            @if($comment->status == 'unpublish')
 
+                                <div class="col-lg-6">
+                                    {!! Form::open(['id' => $comment->id, 'url' => 'change-status/' . $comment->id . '/publish', 'method' => 'PUT']) !!}
+                                    <button class="btn btn-success">
+                                        Publier
+                                    </button>
+                                    {!! Form::close() !!}
+                                </div>
+                                <div class="col-lg-6">
+                                    {!! Form::open(['id' => $comment->id, 'url' => 'change-status/' . $comment->id . '/spam', 'method' => 'PUT']) !!}
+                                    <button class="btn btn-warning">
+                                        Spam
+                                    </button>
+                                    {!! Form::close() !!}
+                                </div>
+                            @else
+                                <div class="col-lg-12">
+                                    {!! Form::open(['id' => $comment->id, 'url' => 'change-status/' . $comment->id . '/unpublish', 'method' => 'PUT']) !!}
+                                    <button class="btn btn-default">
+                                        Dé-publier
+                                    </button>
+                                    {!! Form::close() !!}
+                                </div>
+                            @endif
+                        </td>
+                        <td>
                             <div class="col-lg-6">
-                                {!! Form::open(['id' => $comment->id, 'url' => 'change-status/' . $comment->id . '/publish', 'method' => 'PUT']) !!}
-                                <button class="btn btn-success">
-                                    Publier
-                                </button>
-                                {!! Form::close() !!}
-                            </div>
-                            <div class="col-lg-6">
-                                {!! Form::open(['id' => $comment->id, 'url' => 'change-status/' . $comment->id . '/spam', 'method' => 'PUT']) !!}
-                                <button class="btn btn-warning">
-                                    Spam
-                                </button>
-                                {!! Form::close() !!}
-                            </div>
-                        @else
-                            <div class="col-lg-12">
-                                {!! Form::open(['id' => $comment->id, 'url' => 'change-status/' . $comment->id . '/unpublish', 'method' => 'PUT']) !!}
                                 <button class="btn btn-default">
-                                    Dé-publier
+                                    <a href="{{url('comment/' . $comment->id . '/edit')}}">Editer</a>
+                                </button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="col-lg-12">
+                                {!! Form::open(['class' => 'delete', 'url' => 'comment/' . $comment->id, 'method' => 'DELETE']) !!}
+                                <button class="btn btn-danger">
+                                    Supprimer
                                 </button>
                                 {!! Form::close() !!}
                             </div>
-                        @endif
-                    </td>
-                    <td>
-                        <div class="col-lg-6">
-                            <button class="btn btn-default">
-                                <a href="{{url('comment/' . $comment->id . '/edit')}}">Editer</a>
-                            </button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="col-lg-12">
-                            {!! Form::open(['class' => 'delete', 'url' => 'comment/' . $comment->id, 'method' => 'DELETE']) !!}
-                            <button class="btn btn-danger">
-                                Supprimer
-                            </button>
-                            {!! Form::close() !!}
-                        </div>
-                    </td>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>
