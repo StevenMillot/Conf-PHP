@@ -27,7 +27,6 @@ Route::get('conference/{id}/{slug?}', 'BlogController@showPost');
 Route::get('about', 'BlogController@about');
 Route::get('term', 'BlogController@term');
 Route::get('contact', 'BlogController@contact');
-Route::get('contact', 'FrontController@postContact');
 
 Route::get('tag/{id}', 'BlogController@showTag');
 
