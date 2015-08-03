@@ -28,7 +28,7 @@
                 @if($post->url_site)
                     <p><a class="link-outside" href="{{$post->url_site}}" >site web de la conférence</a></p>
                 @else
-                    <p class="link-outside" > </p>
+                    <p class="link-outside" > {{--Vide pour garder un visuel correct--}} </p>
                 @endif
 
                 @if(count($post->tags)>0)
@@ -40,7 +40,7 @@
                         @endforeach
                     </p>
                 @else
-                    <p class="link-keyword" > </p>
+                    <p class="link-keyword" > {{--Vide pour garder un visuel correct--}} </p>
                 @endif
 
                 <p>Nombre de commentaires:
