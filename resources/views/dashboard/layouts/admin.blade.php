@@ -287,7 +287,7 @@ desired effect
             <div class="message">
                 <p>
                     @if(Session::has('message'))
-                        {{Session::get('message')}}
+                        {!! Session::get('message') !!}
                     @endif
                 </p>
             </div>
