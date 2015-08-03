@@ -15,7 +15,7 @@ class CommentController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->middleware('auth', ['except' => 'show']);
+        $this->middleware('auth', ['only' => 'edit, update']);
     }
 
     /**
@@ -47,7 +47,8 @@ class CommentController extends Controller
 
         $param = $request->all();
         Comment::create($param);
-        return back()->with('message', 'Commentaire envoyé, en attente de validation par l\'administrateur');
+
+        return back()->with('message', 'Commentaire envoyÃ©, en attente de validation par l\'administrateur');
     }
 
     /**
@@ -83,7 +84,7 @@ class CommentController extends Controller
     public function update($id, CommentRequest $request)
     {
         Comment::find($id)->update($request->all());
-        return redirect()->to('comment')->with('message', 'Commentaire modifiée');
+        return redirect()->to('comment')->with('message', 'Commentaire modifiÃ©e');
     }
 
     public function changePublish($id)
@@ -94,7 +95,7 @@ class CommentController extends Controller
 
         $comment->save();
 
-        return redirect()->to('comment')->with('message', 'Status éditer');
+        return redirect()->to('comment')->with('message', 'Status Ã©diter');
     }
 
     public function changeUnpublish($id)
@@ -105,7 +106,7 @@ class CommentController extends Controller
 
         $comment->save();
 
-        return redirect()->to('comment')->with('message', 'Status éditer');
+        return redirect()->to('comment')->with('message', 'Status Ã©diter');
     }
 
     public function changeSpam($id)
@@ -116,7 +117,7 @@ class CommentController extends Controller
 
         $comment->save();
 
-        return redirect()->to('comment')->with('message', 'Status éditer');
+        return redirect()->to('comment')->with('message', 'Status Ã©diter');
     }
 
 
@@ -130,7 +131,7 @@ class CommentController extends Controller
     {
         Comment::destroy($id);
 
-        return redirect()->to('comment')->with('message', 'Commentaire supprimée');
+        return redirect()->to('comment')->with('message', 'Commentaire supprimÃ©e');
     }
 
 }

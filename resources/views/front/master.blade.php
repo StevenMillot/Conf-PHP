@@ -20,13 +20,13 @@
 {{-- *********  CONTAINER ********* --}}
         <div id="main" role="main">
             <section id="post" >
-                <div class="message">
-                    <p>
-                        @if(Session::has('message'))
-                            {{Session::get('message')}}
-                        @endif
-                    </p>
-                </div>
+                @if(Session::has('message'))
+                    <div class="message">
+                        <p>
+                            {!!Session::get('message')!!}
+                        </p>
+                    </div>
+                @endif
                 @yield('content')
             </section>
 
