@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-
     <article class="news">
         <h2>{{$post->title}}</h2>
         <br/>
