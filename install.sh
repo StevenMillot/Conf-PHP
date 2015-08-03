@@ -12,5 +12,9 @@ echo 'DELETE FROM mysql.user WHERE user='choub' and host='choub'
 
 echo "GRANT ALL PRIVILEGES ON conference.* to 'choub'@localhost IDENTIFIED BY 'choub' WITH GRANT OPTION" | mysql --user=root --password=
 
-# php artisan serve
 
+composer install
+
+php artisan migrate --seed
+
+php artisan serve

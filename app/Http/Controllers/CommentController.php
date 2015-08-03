@@ -25,7 +25,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::all();
+        $comments = Comment::all()->sortByDesc('created_at');
         return view('dashboard.comment.index', compact('comments'));
     }
 
@@ -58,7 +58,8 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        return view ('dashboard.comment.show');
+        /*$comment = Comment::find($id);
+        return view ('dashboard.comment.single', compact('comment'));*/
     }
 
     /**
@@ -84,6 +85,40 @@ class CommentController extends Controller
         Comment::find($id)->update($request->all());
         return redirect()->to('comment')->with('message', 'Commentaire modifiée');
     }
+
+    public function changePublish($id)
+    {
+        $comment = Comment::find($id);
+
+        $comment->status = 'publish';
+
+        $comment->save();
+
+        return redirect()->to('comment')->with('message', 'Status éditer');
+    }
+
+    public function changeUnpublish($id)
+    {
+        $comment = Comment::find($id);
+
+        $comment->status = 'unpublish';
+
+        $comment->save();
+
+        return redirect()->to('comment')->with('message', 'Status éditer');
+    }
+
+    public function changeSpam($id)
+    {
+        $comment = Comment::find($id);
+
+        $comment->status = 'spam';
+
+        $comment->save();
+
+        return redirect()->to('comment')->with('message', 'Status éditer');
+    }
+
 
     /**
      * Remove the specified resource from storage.

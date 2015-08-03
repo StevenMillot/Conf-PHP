@@ -5,7 +5,7 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>Status</th>
                 <th>Date de création</th>
                 <th>Conférence</th>
                 <th>Email</th>
@@ -18,7 +18,7 @@
         <tbody>
             @foreach($comments as $comment)
                 <tr>
-                    <td><div class="col-lg-12">{{ $comment->id }}</div></td>
+                    <td><div class="col-lg-12">{{ $comment->status }}</div></td>
                     <td><div class="col-lg-12">{{ $comment->created_at }}</div></td>
                     <td><div class="col-lg-12">{{ $comment->post->title }}</div></td>
                     <td><div class="col-lg-12">{{ $comment->email }}</div></td>
@@ -27,14 +27,14 @@
                         @if($comment->status == 'unpublish')
 
                             <div class="col-lg-6">
-                                {!! Form::open(['id' => $comment->id, 'class' => 'status', 'url' => 'comment/' . $comment->id . '/publish', 'method' => 'PUT']) !!}
+                                {!! Form::open(['id' => $comment->id, 'url' => 'change-status/' . $comment->id . '/publish', 'method' => 'PUT']) !!}
                                 <button class="btn btn-success">
                                     Publier
                                 </button>
                                 {!! Form::close() !!}
                             </div>
                             <div class="col-lg-6">
-                                {!! Form::open(['id' => $comment->id, 'class' => 'status', 'url' => 'comment/' . $comment->id . '/spam', 'method' => 'PUT']) !!}
+                                {!! Form::open(['id' => $comment->id, 'url' => 'change-status/' . $comment->id . '/spam', 'method' => 'PUT']) !!}
                                 <button class="btn btn-warning">
                                     Spam
                                 </button>
@@ -42,7 +42,7 @@
                             </div>
                         @else
                             <div class="col-lg-12">
-                                {!! Form::open(['id' => $comment->id, 'class' => 'status', 'url' => 'comment/' . $comment->id . '/unpublish', 'method' => 'PUT']) !!}
+                                {!! Form::open(['id' => $comment->id, 'url' => 'change-status/' . $comment->id . '/unpublish', 'method' => 'PUT']) !!}
                                 <button class="btn btn-default">
                                     Dé-publier
                                 </button>

@@ -30,7 +30,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::all()->sortByDesc('created_at');
         return view('dashboard.post.index', compact('posts'));
     }
 
@@ -117,8 +117,7 @@ class PostController extends Controller
         $post->update($param);
 
         if(array_key_exists( 'tags', $param))
-            $post->tags()->detach($param['tags']);
-            $post->tags()->attach($param['tags']);
+            $post->tags()->sync($param['tags']);
 
         if ($request->hasFile('thumbnail_link'))
         {
@@ -135,6 +134,19 @@ class PostController extends Controller
         return redirect()->to('post')->with('message', 'Conférence modifiée');
     }
 
+    public function changeStatus($id)
+    {
+        $post = Post::find($id);
+
+        if($post->status == 'unpublish'){
+            $post->status = 'publish';
+        }else{
+            $post->status = 'unpublish';
+        }
+        $post->save();
+
+        return redirect()->to('post')->with('message', 'Status éditer');
+    }
 
     /**
      * Remove the specified resource from storage.

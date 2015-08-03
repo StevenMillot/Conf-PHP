@@ -8,7 +8,7 @@
     <article class="dashboard">
         <h1>Gestion des Conférences</h1>
         <button class="btn btn-success">
-            <a href="{{url('post/create/')}}">
+            <a href="{{url('post/create/')}}" id="link-white">
                 Publier
             </a>
         </button>
@@ -40,7 +40,7 @@
                         <td>{{ $post->date_start }}</td>
                         <td>{{ $post->date_end }}</td>
                         <td>
-                            {!! Form::open(['id' => $post->id, 'class' => 'status', 'url' => 'conference/' . $post->id . '/status', 'method' => 'PUT']) !!}
+                            {!! Form::open(['id' => $post->id, 'class' => 'status', 'url' => 'change-status/' . $post->id , 'method' => 'PUT']) !!}
                             @if($post->status == 'publish')
                                 <button class="btn btn-default">
                                     Dé-publier

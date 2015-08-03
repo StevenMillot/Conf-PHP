@@ -23,6 +23,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     -->
     <link href="{{asset('asset/css/vendor/skins/skin-blue.min.css')}}" rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet" href="{{asset('asset/css/vendor/jquery.datetimepicker.css')}}" />
+
+    <link href="{{asset('asset/css/dashboard.css')}}" rel="stylesheet" type="text/css" />
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -81,6 +85,7 @@ desired effect
                             <span class="label label-success">4</span>
                         </a>
                         <ul class="dropdown-menu">
+                            <li class="header">Fonction mail en construction...</li>
                             <li class="header">You have 4 messages</li>
                             <li>
                                 <!-- inner menu: contains the messages -->
@@ -233,7 +238,7 @@ desired effect
             <!-- search form (Optional) -->
             <form action="#" method="get" class="sidebar-form">
                 <div class="input-group">
-                    <input type="text" name="q" class="form-control" placeholder="Search..." />
+                    <input type="text" name="q" class="form-control" placeholder="Search en construction..." />
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
               </span>
@@ -245,7 +250,7 @@ desired effect
             <ul class="sidebar-menu">
                 <li class="header">BLOG</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="{{url('post/create')}}"><i class="fa fa-link"></i> <span>New Conférence</span></a></li>
+                <li><a href="{{url('post/create')}}"><i class="fa fa-link"></i> <span>New Conférence</span></a></li>
                 {{--<li><a href="#"><i class="fa fa-link"></i> <span>New Comment</span></a></li>--}}
                 <li class="treeview">
                     <a href="#"><i class="fa fa-link"></i> <span>Edit</span> <i class="fa fa-angle-right pull-right"></i></a>
@@ -255,7 +260,8 @@ desired effect
                     </ul>
                 </li>
                 <li class="header">NAVIGATION</li>
-                <li><a href="{{url('/')}}"><span>Index site</span></a></li>
+                <li><a href="{{url('/')}}"><span>Dashboard Index</span></a></li>
+                <li><a href="{{url('/')}}"><span>Site Index</span></a></li>
                 <li><a href="{{url('auth/logout')}}"><span>Logout</span></a></li>
             </ul><!-- /.sidebar-menu -->
         </section>
@@ -286,7 +292,7 @@ desired effect
                 </p>
             </div>
             @section('content')
-                <button class="btn btn-success" ><a href="{{ url('post/create') }} ">New Conférence</a></button><br>
+                <button class="btn btn-success" ><a href="{{ url('post/create') }}" id="link-white" >New Conférence</a></button><br>
                 <br>
                 <button class="btn btn-default"><a href="{{ url('post') }}">Gestion des conférences</a></button><br>
                 <br>
@@ -302,7 +308,7 @@ desired effect
             Design by Steven
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2015 <a href="{{url('about')}}">ConfPHP</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2015 <a href="{{url('term')}}">ConfPHP</a>.</strong> All rights reserved.
     </footer>
 
     <!-- Control Sidebar -->
@@ -379,6 +385,10 @@ desired effect
 <script src="{{asset('asset/js/vendor/bootstrap/bootstrap.min.js')}}" type="text/javascript"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('asset/js/vendor/dist/app.min.js')}}" type="text/javascript"></script>
+
+<script type="text/javascript" src="{{asset('asset/js/vendor/jquery.datetimepicker.js')}}"></script>
+<script type="text/javascript" src="{{asset('asset/js/script.js')}}"></script>
+{{--<script type="text/javascript" src="{{asset('asset/js/vendor/jquery.js')}}"></script>--}}
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
       Both of these plugins are recommended to enhance the

@@ -51,4 +51,10 @@ Route::resource('post', 'PostController');
 \*------------------------------------------*/
 Route::get('dashboard', 'DashboardController@index');
 
+Route::put('change-status/{id}', 'PostController@changeStatus');
+
+Route::put('change-status/{id}/publish', 'CommentController@changePublish');
+Route::put('change-status/{id}/unpublish', 'CommentController@changeUnpublish');
+Route::put('change-status/{id}/spam', 'CommentController@changeSpam');
+
 

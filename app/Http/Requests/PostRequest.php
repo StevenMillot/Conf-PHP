@@ -32,7 +32,7 @@ class PostRequest extends Request
             'date_start'     => 'required',
             'date_end'       => 'required',
             'thumbnail_link' =>'mimes:jpeg,jpg,png|required',
-            'tags'           => 'required'
+            'tags'
         ];
     }
 }

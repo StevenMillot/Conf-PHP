@@ -47,10 +47,13 @@
                 </div>
             </div>
 
+
+
             <div class="form-group">
                 {!! Form::label('date_start', 'Date de début *', ['class' => 'col-lg-offset-2 col-lg-1 control-label']) !!}
                 <div class="col-lg-7">
-                    {!! Form::text('date_start', '', ['class' => 'form-control', 'placeholder' => 'Veuillez saisir la date et l\'heure dans se format : 2015-05-17 09:45:00']) !!}
+                    <input name="date_start" id="datetimepickerCreateStart" type="text" class="form-control"  value="{{ old('date_start') }}" placeholder="Cliquez pour saisir une date">
+                    {{--{!! Form::text('date_start', '', ['class' => 'form-control', 'placeholder' => 'Veuillez saisir la date et l\'heure dans se format : 2015-05-17 09:45:00']) !!}--}}
                     {!! $errors->first('date_start', '<span class="help-block">:message</span>') !!}
                 </div>
             </div>
@@ -58,13 +61,14 @@
             <div class="form-group">
                 {!! Form::label('date_end', 'Date de fin *', ['class' => 'col-lg-offset-2 col-lg-1 control-label']) !!}
                 <div class="col-lg-7">
-                    {!! Form::text('date_end', '', ['class' => 'form-control', 'placeholder' => 'Veuillez saisir la date et l\'heure au format : 2015-05-19 18:30:00']) !!}
+                    <input name="date_end" id="datetimepickerCreateEnd" type="text" class="form-control"  value="{{ old('date_end') }}" placeholder="Cliquez pour saisir une date">
+                    {{--{!! Form::text('date_end', '', ['class' => 'form-control', 'placeholder' => 'Veuillez saisir la date et l\'heure au format : 2015-05-19 18:30:00']) !!}--}}
                     {!! $errors->first('date_end', '<span class="help-block">:message</span>') !!}
                 </div>
             </div>
 
             <div class="form-group">
-                {!! Form::label('tags', 'Tags *', ['class' => 'col-lg-offset-2 col-lg-1 control-label']) !!}
+                {!! Form::label('tags', 'Tags', ['class' => 'col-lg-offset-2 col-lg-1 control-label']) !!}
                 <div class="col-lg-7">
                     @foreach($tags as $tag)
                         <div class="checkbox">
