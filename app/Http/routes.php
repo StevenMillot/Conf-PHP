@@ -57,3 +57,13 @@ Route::put('change-status/{id}/unpublish', 'CommentController@changeUnpublish');
 Route::put('change-status/{id}/spam', 'CommentController@changeSpam');
 
 
+/*------------------------------------------*\
+       Pattern routes
+\*------------------------------------------*/
+
+Route::get('test', function() {
+    Mail::send('emails.welcome', ['key' => 'Hello Moi'], function($message)
+    {
+        $message->to('steven.millot@gmail.com', 'Steven Millot')->subject('Welcome!');
+    });
+});
